@@ -1,0 +1,32 @@
+
+<label for="surfaceFilter">Filter by Surface:</label>
+<input type="number" id="surfaceFilter" [(ngModel)]="surfaceFilter" />
+<button class="btn btn-primary" (click)="filterApartments()">Search</button>
+
+
+
+<ul class="list-groupe">
+    <li class="list-groupe-item" *ngFor="let R of listResidences">
+        <img [src]="R.image" alt="">{{R.name}}
+    <button class ="btn btn-primary" (click)="showAppartment(R.id)">show appartments</button>
+    </li>  
+</ul>
+
+<div *ngIf="list.length > 0; else noApartmentsTemplate">
+    <ul class="list-apartments">
+        
+        <li *ngFor="let apartment of list">
+            {{ apartment.appartNum }}
+            <button class="btn btn-primary" (click)="toggleLike(apartment)">
+              {{ apartment.isLiked ? 'Unlike' : 'Like' }}
+            </button>
+          </li>
+          
+    </ul>
+</div>
+
+<ng-template #noApartmentsTemplate>
+    <div>
+        <p>No Apartment found</p>
+    </div>
+</ng-template>
