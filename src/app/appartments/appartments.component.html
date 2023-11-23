@@ -1,0 +1,20 @@
+
+<h1>List Appartments</h1>
+<div *ngIf="list.length > 0; else noApartmentsTemplate">
+    <ul class="list-apartments">
+        
+        <li *ngFor="let apartment of list">
+            {{ apartment.appartNum }}
+            
+            
+          </li>
+          
+    </ul>
+</div>
+
+<ng-template #noApartmentsTemplate>
+    <div>
+        <p>No Apartment found</p>
+        <button class="btn btn-outline-warning btn-sm" [routerLink]="['/addAppartment',id]">add new Apartment </button>
+    </div>
+</ng-template>

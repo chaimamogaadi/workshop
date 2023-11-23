@@ -8,11 +8,11 @@
 <ul class="list-groupe">
     <li class="list-groupe-item" *ngFor="let R of listResidences">
         <img [src]="R.image" alt="">{{R.name}}
-    <button class ="btn btn-primary" (click)="showAppartment(R.id)">show appartments</button>
+    <button class ="btn btn-primary" [routerLink]="['/detailsappartment',R.id]">show appartments</button>
     </li>  
 </ul>
 
-<div *ngIf="list.length > 0; else noApartmentsTemplate">
+<!------------<div *ngIf="list.length > 0; else noApartmentsTemplate">
     <ul class="list-apartments">
         
         <li *ngFor="let apartment of list">
@@ -30,3 +30,4 @@
         <p>No Apartment found</p>
     </div>
 </ng-template>
+----->

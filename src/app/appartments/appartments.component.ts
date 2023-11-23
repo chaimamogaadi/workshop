@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Residence } from '../Core/Models/residence';
 import { Appartment } from '../Core/Models/appartment';
 
 @Component({
-  selector: 'app-residences',
-  templateUrl: './residences.component.html',
-  styleUrls: ['./residences.component.css']
+  selector: 'app-appartments',
+  templateUrl: './appartments.component.html',
+  styleUrls: ['./appartments.component.css']
 })
-export class ResidencesComponent {
+export class AppartmentsComponent {
+  id! :number;
+  noApartmentsFound: boolean = false;
+  list:Appartment[]=[];
   listResidences:Residence[]=[
     {id:1,"name": "El fel","address":"Borj Cedria",
     "image":"../../assets/images/R1.jpeg"},
@@ -22,24 +26,13 @@ export class ResidencesComponent {
       {id:1,"appartNum":1,"floorNum":0,"surface":100,"terrace":"oui","surfaceTerrace":20,"category":"S+1","description":"Appartement S+1","residence":this.listResidences[0], "isLiked": false },
       {id:2,"appartNum":2,"floorNum":0,"surface":130,"terrace":"non","surfaceTerrace":0,"category":"S+2","description":"Appartement S+2","residence":this.listResidences[0], "isLiked": false },
       {id:3,"appartNum":3,"floorNum":0,"surface":150,"terrace":"oui","surfaceTerrace":30,"category":"S+3","description":"Appartement S+3","residence":this.listResidences[1], "isLiked": false }  ];
-    list:Appartment[]=[];
-    noApartmentsFound: boolean = false;
-    surfaceFilter: number | undefined;
    
-      showAppartment(id:number){
-        this.list=this.listApartments.filter((appart:Appartment)=>appart.residence.id==id)
-        this.noApartmentsFound = this.list.length === 0;
-      }
       
-  toggleLike(apartment: Appartment) {
-    apartment.isLiked = !apartment.isLiked;
-  }
-  filterApartments() {
-    console.log('List Before Filtering:', this.listApartments);
-    if (this.surfaceFilter !== undefined) {
-      this.list = this.listApartments.filter(appart => appart.surface === this.surfaceFilter);
-      this.noApartmentsFound = this.list.length === 0;
-    }
-    console.log('List After Filtering:', this.surfaceFilter);}
+      constructor(private actR:ActivatedRoute){
+}
+ngOnInit(){
+  this.id=Number(this.actR.snapshot.paramMap.get('param'));
+  this.list=this.listApartments.filter((appart:Appartment)=>appart.residence.id==this.id)
 
-   }
+}
+}
